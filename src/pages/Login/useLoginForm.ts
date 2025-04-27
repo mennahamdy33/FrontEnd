@@ -14,7 +14,9 @@ export const useLoginForm = () => {
       password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email("Invalid email format").required("Email is required"),
+      email: Yup.string()
+        .email("Invalid email format")
+        .required("Email is required"),
       password: Yup.string().required("Password is required"),
     }),
     onSubmit: async (values) => {
@@ -33,10 +35,16 @@ export const useLoginForm = () => {
           const message = error.response?.data?.message;
 
           if (message === "User email not verified") {
-            setErrorMessage("Your email is not verified. Please check your inbox.");
+            setErrorMessage(
+              "Your email is not verified. Please check your inbox."
+            );
           } else {
             setErrorMessage("Wrong email or password.");
           }
+        } else if (error.response?.status === 429) {
+          setErrorMessage(
+            "Too many login attempts. Please try again later."
+          );
         } else {
           setErrorMessage("Something went wrong. Please try again.");
         }

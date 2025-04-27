@@ -3,6 +3,7 @@ import { useFormik } from "formik";
 import { signupValidationSchema } from "../../validations/signupValidation";
 import { useState } from "react";
 import { signupRequest } from "../../api/auth.api";
+import { omit } from "lodash";
 
 export const useSignUpForm = () => {
   const [loading, setLoading] = useState(false);
@@ -23,18 +24,21 @@ export const useSignUpForm = () => {
     onSubmit: async (values, { resetForm }) => {
       setLoading(true);
       try {
-        await signupRequest(values);
+        await signupRequest(omit(values, "confirmPassword"));
 
         setSnackbar({
           open: true,
-          message: "Signed up successfully! Please check your email to verify your account.",
+          message:
+            "Signed up successfully! Please check your email to verify your account.",
           severity: "success",
         });
         resetForm();
       } catch (error: any) {
         setSnackbar({
           open: true,
-          message: error.response?.data?.message || "Sign up failed. Please try again.",
+          message:
+            error.response?.data?.message ||
+            "Sign up failed. Please try again.",
           severity: "error",
         });
       } finally {
