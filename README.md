@@ -1,54 +1,122 @@
-# React + TypeScript + Vite
+# React + TypeScript + Vite + Material UI + Formik Authentication App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project provides a clean fullstack-ready setup using:
 
-Currently, two official plugins are available:
+- **React 18** (Frontend)
+- **TypeScript** (Type Safety)
+- **Vite** (Super fast development)
+- **Material UI (MUI)** (UI Library)
+- **Formik + Yup** (Form management and validation)
+- **Axios** (API communication)
+- **React Router 6** (Routing)
+- **Integration with NestJS Backend** for:
+  - Signup
+  - Email Verification
+  - Login
+  - Protected User Data fetching
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📦 Install Dependencies
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+---
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+## ⚙️ Environment Setup
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+Copy the `.env.sample` file and create your `.env` file:
+
+```bash
+cp .env.sample .env
+```
+
+Inside `.env`, configure:
+
+```bash
+VITE_API_BASE_URL=http://localhost:3000
+```
+
+(This is the base URL for connecting to your NestJS backend.)
+
+---
+
+## 🚀 Run the app
+
+```bash
+npm run dev
+```
+
+The app will start on:
+
+```bash
+http://localhost:5173
+```
+
+---
+
+
+## 🛠️ Project Features
+
+- User **Sign Up** with full validation (email, password complexity, confirm password).
+- User **Login** with token saving to localStorage.
+- Email **Verification** flow handled via secure links.
+- **Protected Routes**: User profile is fetched securely after login using JWT.
+- **Snackbar Notifications** for success and error messages.
+- **Loading States** on form submissions.
+- Clean modular structure with API request separation.
+
+---
+
+## 📚 Useful commands for Vite
+
+### Build for production:
+
+```bash
+npm run build
+```
+
+### Preview production build:
+
+```bash
+npm run preview
+```
+
+---
+
+## 🔥 Additional Technologies to Expand (Optional)
+
+- React Query / Tanstack Query (API management)
+- Zustand / Redux Toolkit (State management)
+- Framer Motion (Animations)
+- Unit Testing (Vitest / React Testing Library)
+
+---
+
+## ✨ Acknowledgements
+
+This app uses:
+
+- [Vite](https://vitejs.dev/)
+- [Material UI](https://mui.com/)
+- [Formik](https://formik.org/)
+- [Yup](https://github.com/jquense/yup)
+- [React Router](https://reactrouter.com/)
+- [Axios](https://axios-http.com/)
+
+---
+
+## ✅ Folder Structure
+
+```
+src/
+├── api/             # API Requests (Axios wrappers)
+├── pages/           # Pages (SignUp, Login, VerifyEmail, Welcome, etc.)
+├── validations/     # Yup validation schemas
+├── lib/             # Axios instance and utilities
+├── App.tsx          # Router setup
+├── main.tsx         # Entry point
+└── theme.ts         # MUI Theme config (optional)
 ```
